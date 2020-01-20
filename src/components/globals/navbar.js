@@ -1,35 +1,37 @@
 import React, { useState } from "react"
 
+import { connect } from 'react-redux';
 import { Link } from 'gatsby';
+
+import * as actions from '../../store/actions';
 
 import { FaCartArrowDown } from 'react-icons/fa';
 import Logo from '../../images/logo.svg';
 
-const Navbar = () => {
+const links = [
+  {
+    id: 1,
+    path: '/',
+    text: 'Home',
+  },
+  {
+    id: 2,
+    path: '/about',
+    text: 'About',
+  },
+];
 
-  const [navbarOpen, setNavbarOpen] = useState(false);
+const Navbar = (props) => {
+
   const [css, setCss] = useState('collapse navbar-collapse');
-  const links = [
-    {
-      id: 1,
-      path: '/',
-      text: 'Home',
-    },
-    {
-      id: 2,
-      path: '/about',
-      text: 'About',
-    },
-  ];
 
   const navbarHandler = () => {
-    if( navbarOpen ){
-      setNavbarOpen(false);
+    if( props.navbarOpen ){
       setCss('collapse navbar-collapse');
     }else{
-      setNavbarOpen(true);
       setCss('collapse navbar-collapse show');
     }
+    props.toggleMenu();
   }
 
   return (
@@ -65,4 +67,16 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+const mapStateToProps = (state) => {
+  return {
+    navbarOpen: state.navigation.navbarOpen,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleMenu: () => dispatch( actions.toggleMenu() ),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
