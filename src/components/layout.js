@@ -8,6 +8,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Navbar from './globals/navbar';
+
 import './bootstrap.min.css';
 import "./layout.css";
 
@@ -15,6 +17,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Navbar/>
       {children}
     </>
   )
