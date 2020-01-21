@@ -6,7 +6,11 @@ import Image from "gatsby-image";
 import Title from '../globals/title';
 import * as actions from "../../store/actions"
 
-const Menu = ({items}) => {
+const Menu = ({items, categories, filterMenu}) => {
+
+  const handleItemsFilter = (category) => {
+    filterMenu(category);
+  };
 
   const renderedItems = items.length === 0 ?
     (
@@ -25,8 +29,8 @@ const Menu = ({items}) => {
 
 
                 <div className="d-flex justify-content-between">
-                  <h6 className="mb-0">{node.title}</h6>
-                  <h6 className="mb-0">${node.price}</h6>
+                  <h6 className="mb-0"><small>{node.title}</small></h6>
+                  <h6 className="mb-0 text-yellow"><small>${node.price}</small></h6>
                 </div>
 
                 <p className="text-muted"><small>{node.description.description}</small></p>
@@ -46,6 +50,18 @@ const Menu = ({items}) => {
 
         <Title title="best of our menu" />
 
+        <div className="row mb-5">
+
+          <div className="col-10 mx-auto text-center">
+            {categories.map( (item, index) => {
+              return (
+                <button key={index} type="button" className="btn btn-yellow text-capitalize m-3" onClick={() => handleItemsFilter(item)}>{item}</button>
+              )
+            })}
+          </div>
+
+        </div>
+
         <div className="row">
 
           {renderedItems}
@@ -61,12 +77,13 @@ const Menu = ({items}) => {
 const mapStateToProps = (state) => {
   return {
     items: state.menu.filtered,
+    categories: state.menu.categories,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    filterMenu: (category) => dispatch( actions.filterMenu(category) ),
   }
 };
 

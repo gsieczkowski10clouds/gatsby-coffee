@@ -6,3 +6,10 @@ export const storeMenu = (items) => {
     items: items,
   }
 }
+
+export const filterMenu = (category) => {
+  return{
+    type: actionTypes.FILTER_MENU,
+    category: category,
+  }
+}
