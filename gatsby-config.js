@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Coffee Shop`,
@@ -26,6 +30,14 @@ module.exports = {
         theme_color: `#993801`,
         display: `minimal-ui`,
         icon: `src/images/logo.svg`, // This path is relative to the root of the site.
+      },
+    },
+
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `48t1s0p1dk0p`,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
 
