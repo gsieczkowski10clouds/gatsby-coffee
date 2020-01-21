@@ -12,7 +12,7 @@ const links = [
   {
     id: 1,
     path: '/',
-    text: 'Home',
+    text: 'home',
   },
   {
     id: 2,

@@ -5,6 +5,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import BackgroundSection from '../components/globals/backgroundSection';
+import Info from '../components/home/info';
 
 export const query = graphql`
 query{
@@ -20,7 +21,6 @@ query{
 
 
 const IndexPage = ({data}) => {
-  console.log( data );
 
   return (
     <Layout>
@@ -28,6 +28,8 @@ const IndexPage = ({data}) => {
       <SEO title="Home" />
 
       <BackgroundSection image={data.bg.childImageSharp} title="Coffee shop" styleClass="default-background"/>
+
+      <Info/>
 
     </Layout>
   )
