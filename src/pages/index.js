@@ -1,11 +1,15 @@
-import React from "react"
+import React, { useEffect } from "react"
 
+import { connect } from 'react-redux';
 import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import BackgroundSection from '../components/globals/backgroundSection';
 import Info from '../components/home/info';
+import Menu from '../components/home/menu';
+
+import * as actions from '../store/actions';
 
 export const query = graphql`
 query{
@@ -16,11 +20,35 @@ query{
       }
     }
   }
+  menu:allContentfulCoffeeItem {
+    edges {
+      node {
+        id
+        title
+        description {
+          description
+        }
+        price
+        category
+        image{
+          fixed(width:50,height:50){
+            ...GatsbyContentfulFixed_tracedSVG
+          }
+        }
+      }
+    }
+  }
 }
 `;
 
 
-const IndexPage = ({data}) => {
+const IndexPage = ({data, storeMenu}) => {
+
+  const menuItems = data.menu.edges;
+
+  useEffect(() => {
+    storeMenu(menuItems)
+  }, [storeMenu, menuItems]);
 
   return (
     <Layout>
@@ -31,8 +59,16 @@ const IndexPage = ({data}) => {
 
       <Info/>
 
+      <Menu/>
+
     </Layout>
   )
 }
 
-export default IndexPage
+const mapDispatchToProps = (dispatch) => {
+  return {
+    storeMenu: (items) => dispatch( actions.storeMenu(items) ),
+  }
+};
+
+export default connect(null, mapDispatchToProps)(IndexPage);
