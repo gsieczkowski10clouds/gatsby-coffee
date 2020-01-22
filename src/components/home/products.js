@@ -29,24 +29,18 @@ const ProductsSection = () => {
   return (
     <StaticQuery query={queryProducts} render={ (data) => {
       return (
-        <>
-          {data.products.edges.map( ({node}) => {
-            return (
-              <section className="py-5">
-                <div className="container">
-                  <Title title="our products"/>
-                  <div className="row">
-                    {data.products.edges.map( ({node}) => {
-                      return (
-                        <Product key={node.id} product={node} />
-                      )
-                    })}
-                  </div>
-                </div>
-              </section>
-            )
-          })}
-        </>
+        <section className="py-5">
+          <div className="container">
+            <Title title="our products"/>
+            <div className="row">
+              {data.products.edges.map( ({node}) => {
+                return (
+                  <Product key={node.id} product={node} />
+                )
+              })}
+            </div>
+          </div>
+        </section>
       )
     }}/>
   )

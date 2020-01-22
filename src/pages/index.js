@@ -9,6 +9,7 @@ import BackgroundSection from '../components/globals/backgroundSection';
 import Info from '../components/home/info';
 import Menu from '../components/home/menu';
 import Products from '../components/home/products';
+import Contact from '../components/home/contact';
 
 import * as actions from '../store/actions';
 
@@ -63,6 +64,8 @@ const IndexPage = ({data, storeMenu}) => {
       <Menu/>
 
       <Products/>
+
+      <Contact/>
 
     </Layout>
   )
