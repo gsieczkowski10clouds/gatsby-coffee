@@ -15,6 +15,7 @@ query{
         price
         image{
           fluid(maxHeight:426){
+          src
             ...GatsbyContentfulFluid_tracedSVG
           }
         }
